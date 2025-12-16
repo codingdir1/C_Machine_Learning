@@ -1,0 +1,23 @@
+#include <stdlib.h>
+#include <math.h>
+#include "matrix.h"
+
+struct Matrix *matrix_sigmoid(const struct Matrix *a)
+{
+    if (a == NULL)
+    {
+        return NULL;
+    }
+
+    struct Matrix *c = full_matrix(0, a->rows, a->cols);
+    if (c == NULL)
+    {
+        return NULL;
+    }
+    
+    for (int i = 0; i < c->cols * c->rows; i += 1)
+    {
+        c->data[i] = (float) (1 / (1 + exp(-1 * a->data[i])));
+    }
+    return c;
+}

@@ -1,7 +1,4 @@
 The "MNIST_binary_classification" is the folder containing binary classification model design.
-The "matrix" folder contains matrix related files.
-The "neuron" folder contains neuron related files.
-The "display" folder contains functions for creating some GtkWidget objects.
 Use "gcc train.c ../matrix/*.c ../neuron/*.c -I include/ -o train.out -lm" to compile, and "./train.out" to view the training.
 For evaluating, install "VcXsrv" to install an X-server, and run "sudo apt install libgtk-3-dev -y" to install the GTK library.
 Use "gcc evaluate.c ../matrix/*.c ../neuron/*.c ../display/*.c ./handlers/*.c  -I include/ `pkg-config --cflags --libs gtk+-3.0` -o evaluate.out -lm" to get a output file "evaluate.out".

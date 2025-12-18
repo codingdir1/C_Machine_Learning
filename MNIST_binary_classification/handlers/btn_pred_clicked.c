@@ -6,14 +6,14 @@ void btn_pred_clicked(GtkButton *button, struct Data *data)
         return;
     }
 
-    struct Matrix *A = forward_prop(data->neuron, data->image);
+    struct Matrix *A = neuron_forward_prop(data->neuron, data->image);
     if (A == NULL)
     {
         return;
     }
     
-    struct Matrix *predictions = pred(A);
-    if (pred == NULL)
+    struct Matrix *predictions = neuron_pred(A);
+    if (predictions == NULL)
     {
         return;
     }

@@ -10,7 +10,7 @@ int main()
 
     struct Neuron *n = neuron_init(784, "./model/weights.csv", "./model/bias.txt");
     
-    train(n, X, Y, 80, 0.03, "./model/weights.csv", "./model/bias.txt");
+    neuron_train(n, X, Y, 80, 0.03, "./model/weights.csv", "./model/bias.txt");
 
     matrix_free(X);
     matrix_free(Y);

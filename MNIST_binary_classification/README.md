@@ -6,3 +6,4 @@ After running "./evaluate.out", draw on the drawing area by dragging the mouse.
 For accuary reasons, draw the image around the center, and give the pixels high activations.
 Press "Predict" to see the predictions.
 Press "Refresh" to clear the drawing area.
+

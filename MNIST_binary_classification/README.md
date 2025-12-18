@@ -7,3 +7,5 @@ For accuary reasons, draw the image around the center, and give the pixels high 
 Press "Predict" to see the predictions.
 Press "Refresh" to clear the drawing area.
 
+
+

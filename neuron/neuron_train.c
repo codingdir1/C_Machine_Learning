@@ -3,7 +3,7 @@
 #include "matrix.h"
 #include "neuron.h"
 
-void train(struct Neuron *n, struct Matrix *X, struct Matrix *Y, int epochs, float alpha, const char *weight_file, const char *bias_file)
+void neuron_train(struct Neuron *n, struct Matrix *X, struct Matrix *Y, int epochs, float alpha, const char *weight_file, const char *bias_file)
 {
     if (n == NULL || X == NULL || Y == NULL || alpha <= 0 || epochs <= 0 || weight_file == NULL || bias_file == NULL)
     {
@@ -15,12 +15,12 @@ void train(struct Neuron *n, struct Matrix *X, struct Matrix *Y, int epochs, flo
     int i = 0, status;
     while (i < epochs)
     {
-        A = forward_prop(n, X);
-        predictions = pred(A);
-        gradient_descent(n, X, Y, alpha);
+        A = neuron_forward_prop(n, X);
+        predictions = neuron_pred(A);
+        neuron_gradient_descent(n, X, Y, alpha);
         
-        printf("Cost of neuron: %f\n", cost(A, Y));
-        printf("Model accuracy: %f percent\n", 100 * accuracy(predictions, Y));
+        printf("Cost of neuron: %f\n", neuron_cost(A, Y));
+        printf("Model accuracy: %f percent\n", 100 * neuron_accuracy(predictions, Y));
         
         i += 1;
         matrix_free(predictions);

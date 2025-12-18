@@ -2,7 +2,7 @@
 #include "matrix.h"
 #include "neuron.h"
 
-void gradient_descent(struct Neuron *n, struct Matrix *X, struct Matrix *Y, float alpha)
+void neuron_gradient_descent(struct Neuron *n, struct Matrix *X, struct Matrix *Y, float alpha)
 {
     if (n != NULL && n->A != NULL && Y != NULL && X != NULL && n->W != NULL)
     {

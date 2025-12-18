@@ -3,7 +3,7 @@
 #include "matrix.h"
 #include "neuron.h"
 
-struct Matrix *forward_prop(struct Neuron *n, struct Matrix *X)
+struct Matrix *neuron_forward_prop(struct Neuron *n, struct Matrix *X)
 {
     if (n == NULL || X == NULL)
     {

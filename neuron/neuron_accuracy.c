@@ -2,7 +2,7 @@
 #include "matrix.h"
 #include "neuron.h"
 
-float accuracy(struct Matrix *A, struct Matrix *Y)
+float neuron_accuracy(struct Matrix *A, struct Matrix *Y)
 {
     if (A == NULL || Y == NULL)
     {

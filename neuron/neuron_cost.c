@@ -2,7 +2,7 @@
 #include <math.h>
 #include "matrix.h"
 
-float cost(struct Matrix *A, struct Matrix *Y)
+float neuron_cost(struct Matrix *A, struct Matrix *Y)
 {
     if (A->rows != Y->rows || A->cols != Y->cols)
     {

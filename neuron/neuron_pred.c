@@ -2,7 +2,7 @@
 #include "matrix.h"
 #include "neuron.h"
 
-struct Matrix *pred(struct Matrix *A)
+struct Matrix *neuron_pred(struct Matrix *A)
 {
     if (A == NULL)
     {

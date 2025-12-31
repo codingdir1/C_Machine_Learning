@@ -10,13 +10,13 @@ struct Matrix *neuron_forward_prop(struct Neuron *n, struct Matrix *X)
         return NULL;
     }
 
-    struct Matrix *WX = matrix_mul(n->W, X);
+    struct Matrix *WX = matrix_mul(n->W, X, 1, "Forward propagation");
     if (WX == NULL)
     {
         return NULL;
     }
 
-    struct Matrix *z = matrix_scl_add(WX, n->b);
+    struct Matrix *z = matrix_scl_add(WX, n->b, 0, NULL);
     if (z == NULL)
     {
         return NULL;
@@ -26,7 +26,7 @@ struct Matrix *neuron_forward_prop(struct Neuron *n, struct Matrix *X)
     {
         matrix_free(n->A);
     }
-    n->A = matrix_sigmoid(z);
+    n->A = matrix_sigmoid(z, 0, NULL);
     
     matrix_free(WX);
     matrix_free(z);

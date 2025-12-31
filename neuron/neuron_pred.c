@@ -9,7 +9,7 @@ struct Matrix *neuron_pred(struct Matrix *A)
         return NULL;
     }
 
-    struct Matrix *predictions = full_matrix(0, A->rows, A->cols);
+    struct Matrix *predictions = full_matrix(0, A->rows, A->cols, 0, NULL);
     if (predictions == NULL)
     {
         return NULL;

@@ -15,8 +15,12 @@ void neuron_train(struct Neuron *n, struct Matrix *X, struct Matrix *Y, int epoc
     int i = 0, status;
     while (i < epochs)
     {
+        printf("Epoch %d\n", i);
+
         A = neuron_forward_prop(n, X);
+
         predictions = neuron_pred(A);
+
         neuron_gradient_descent(n, X, Y, alpha);
         
         printf("Cost of neuron: %f\n", neuron_cost(A, Y));

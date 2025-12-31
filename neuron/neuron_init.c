@@ -26,9 +26,10 @@ struct Neuron *neuron_init(int nx, const char *weight_file, const char *bias_fil
 
     if (weight_file == NULL)
     {
-        n->W = full_matrix(0, 1, nx);
+        n->W = full_matrix(0, 1, nx, 0, NULL);
     } else {
-        n->W = matrix_load_csv(weight_file, 1, nx);
+        n->W = matrix_load_csv(weight_file, 1, nx, 1, "Loading weights");
+        printf("\n");
     }
     if (n->W == NULL)
     {

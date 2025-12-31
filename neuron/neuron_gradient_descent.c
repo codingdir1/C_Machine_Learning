@@ -6,19 +6,19 @@ void neuron_gradient_descent(struct Neuron *n, struct Matrix *X, struct Matrix *
 {
     if (n != NULL && n->A != NULL && Y != NULL && X != NULL && n->W != NULL)
     {
-        struct Matrix *dZ = matrix_sub(n->A, Y);
-        struct Matrix *X_T = matrix_transpose(X);
-        struct Matrix *dZ_X_T = matrix_mul(dZ, X_T);
+        struct Matrix *dZ = matrix_sub(n->A, Y, 0, NULL);
+        struct Matrix *X_T = matrix_transpose(X, 0, NULL);
+        struct Matrix *dZ_X_T = matrix_mul(dZ, X_T, 1, "Back propagation");
 
-        struct Matrix *dW = matrix_scl_mul(dZ_X_T, 1.0f / Y->cols);
-        struct Matrix *alpha_dW = matrix_scl_mul(dW, alpha);
+        struct Matrix *dW = matrix_scl_mul(dZ_X_T, 1.0f / Y->cols, 0, NULL);
+        struct Matrix *alpha_dW = matrix_scl_mul(dW, alpha, 0, NULL);
         
 
-        struct Matrix *W_updated = matrix_sub(n->W, alpha_dW);
+        struct Matrix *W_updated = matrix_sub(n->W, alpha_dW, 0, NULL);
         matrix_free(n->W);
         n->W = W_updated;
         
-        struct Matrix *db_matrix = matrix_sum(dZ, -1);
+        struct Matrix *db_matrix = matrix_sum(dZ, -1, 0, NULL);
         float db = db_matrix->data[0] / Y->cols;
         n->b -= alpha * db;
 

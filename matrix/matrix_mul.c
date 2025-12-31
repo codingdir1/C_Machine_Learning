@@ -1,8 +1,6 @@
-#include <stdlib.h>
-//#include <stdio.h>
 #include "matrix.h"
 
-struct Matrix *matrix_mul(const struct Matrix *a, const struct Matrix *b)
+struct Matrix *matrix_mul(const struct Matrix *a, const struct Matrix *b, const char show_progress, const char *label)
 {
     if (a == NULL || b == NULL)
     {
@@ -11,11 +9,10 @@ struct Matrix *matrix_mul(const struct Matrix *a, const struct Matrix *b)
     
     if (a->cols != b->rows)
     {
-        //perror("Error\n");
         return NULL;
     }
 
-    struct Matrix *product = full_matrix(0, a->rows, b->cols);
+    struct Matrix *product = full_matrix(0, a->rows, b->cols, 0, NULL);
     if (product == NULL)
     {
         return NULL;
@@ -31,7 +28,16 @@ struct Matrix *matrix_mul(const struct Matrix *a, const struct Matrix *b)
                 sum += a->data[i * a->cols + k] * b->data[k * b->cols + j];
             }
             product->data[i * product->cols + j] = sum;
+
+            if (show_progress == 1 && label != NULL)
+            {
+                progress_bar(label, i * product->cols + (j + 1), product->rows * product->cols);
+            }
         }
+    }
+    if (show_progress == 1 && label != NULL)
+    {
+        printf("\n");
     }
     return product;
 }

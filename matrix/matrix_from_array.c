@@ -1,7 +1,6 @@
-#include <stdlib.h>
 #include "matrix.h"
 
-struct Matrix *matrix_from_array(const float *arr, const unsigned long int size, const int rows, const int cols)
+struct Matrix *matrix_from_array(const float *arr, const unsigned long int size, const int rows, const int cols, const char show_progress, const char *label)
 {
     if (size != rows * cols)
     {
@@ -25,11 +24,19 @@ struct Matrix *matrix_from_array(const float *arr, const unsigned long int size,
     while (i < rows * cols)
     {
         m->data[i] = arr[i];
+        if (show_progress == 1 && label != NULL)
+        {
+            progress_bar(label, i + 1, m->rows * m->cols);
+        }
         i += 1;
     }
     
     m->rows = rows;
     m->cols = cols;
+    if (show_progress == 1 && label != NULL)
+    {
+        printf("\n");
+    }
 
     return m;
 }

@@ -1,7 +1,6 @@
-#include <stdlib.h>
 #include "matrix.h"
 
-struct Matrix *full_matrix(const float value, const int rows, const int cols)
+struct Matrix *full_matrix(const float value, const int rows, const int cols, const char show_progress, const char *label)
 {
     struct Matrix *m = malloc(sizeof(struct Matrix));
     if (m == NULL)
@@ -22,7 +21,17 @@ struct Matrix *full_matrix(const float value, const int rows, const int cols)
     while (i < rows * cols)
     {
         m->data[i] = value;
+        if (show_progress == 1 && label != NULL)
+        {
+            progress_bar(label, i + 1, rows * cols);
+        }
         i += 1;
     }
+
+    if (show_progress == 1 && label != NULL)
+    {
+        printf("\n");
+    }
+
     return m;
 }

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "matrix.h"
 
 int matrix_save_csv(const struct Matrix *a, const char *filename)

@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "matrix.h"
 
 void matrix_free(struct Matrix *m)

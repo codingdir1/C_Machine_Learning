@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "matrix.h"
 
-struct Matrix *matrix_load_csv(const char *filename, int rows, int cols)
+struct Matrix *matrix_load_csv(const char *filename, const int rows, const int cols, const char show_progress, const char *label)
 {
     if (filename == NULL || rows <= 0 || cols <= 0)
     {
@@ -16,7 +13,7 @@ struct Matrix *matrix_load_csv(const char *filename, int rows, int cols)
         return NULL;
     }
 
-    struct Matrix *a = full_matrix(0, rows, cols);
+    struct Matrix *a = full_matrix(0, rows, cols, 0, NULL);
     if (a == NULL)
     {
         fclose(fp);
@@ -35,6 +32,12 @@ struct Matrix *matrix_load_csv(const char *filename, int rows, int cols)
         {            
             a->data[i * cols + j] = atof(token);
             token = strtok(NULL, ",");
+            
+            if (show_progress == 1 && label != NULL)
+            {
+                progress_bar(label, i * cols + (j + 1), rows * cols);
+            }
+
             j += 1;
         }
 
@@ -52,6 +55,10 @@ struct Matrix *matrix_load_csv(const char *filename, int rows, int cols)
         matrix_free(a);
         fclose(fp);
         return NULL;
+    }
+    if (show_progress == 1 && label != NULL)
+    {
+        printf("\n");
     }
     fclose(fp);
     return a;

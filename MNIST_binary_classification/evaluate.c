@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "matrix.h"
 #include "neuron.h"
 #include "display.h"
@@ -10,7 +9,7 @@ int main(int argc, char **argv)
 
     struct Data data = {0};
     data.mouse_down = 0;
-    data.image = full_matrix(0, 784, 1);
+    data.image = full_matrix(0, 784, 1, 0, NULL);
     data.rows = data.image->rows;
     data.cols = data.image->cols;
     data.width = data.height = 280;

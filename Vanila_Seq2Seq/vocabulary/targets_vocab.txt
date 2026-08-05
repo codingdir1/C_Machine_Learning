@@ -2,6 +2,7 @@
 <SOS>
 <EOS>
 <UNK>
+<SPC>
 م
 ر
 ح

@@ -44,7 +44,8 @@ void byte_pair_encoding(const wchar_t **sentences, const int line_num, const int
         (*vocab_array)[1] = wcsdup(L"<SOS>");
         (*vocab_array)[2] = wcsdup(L"<EOS>");
         (*vocab_array)[3] = wcsdup(L"<UNK>");
-        *vocab_count = 4;
+        (*vocab_array)[4] = wcsdup(L"<SPC>");
+        *vocab_count = 5;
 
         for (i = 0; i < num_words; i += 1)
         {
@@ -86,6 +87,7 @@ void byte_pair_encoding(const wchar_t **sentences, const int line_num, const int
                 free(word_copy);
             }
         }
+
         if (vocab_file_name != NULL && save == 1)
         {
             FILE *file_ptr = fopen(vocab_file_name, "w, ccs=UTF-8");

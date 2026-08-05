@@ -2,7 +2,11 @@
 
 void get_vocab_from_data(const wchar_t **sentences, const int line_num, const int iterations, const char *iter_file_name, wchar_t ***vocab_array, int *vocab_count, const char *vocab_file_name, int save)
 {
-    if (sentences == NULL || line_num <= 0 || iterations <= 0 || iter_file_name == NULL || *vocab_count != 0 || vocab_file_name == NULL)
+    //if (sentences == NULL || line_num <= 0 || iterations <= 0 || iter_file_name == NULL || *vocab_count != 0 || vocab_file_name == NULL)
+    //{
+    //    return;
+    //}
+    if (iterations <= 0 || iter_file_name == NULL || vocab_array == NULL || *vocab_count != 0 || vocab_file_name == NULL)
     {
         return;
     }
@@ -24,7 +28,7 @@ void get_vocab_from_data(const wchar_t **sentences, const int line_num, const in
     FILE *file_ptr = fopen(vocab_file_name, "r, ccs=UTF-8");
     if (file_ptr != NULL && vocab_array != NULL && prev_iter_exists == 1)
     {
-        if (prev_iterations == iterations)
+        if (prev_iterations == iterations && sentences == NULL && line_num == 0)
         {
             wchar_t buffer[MAX_TOKEN_LENGTH];
             while (fgetws(buffer, MAX_TOKEN_LENGTH, file_ptr) != NULL)
@@ -57,12 +61,12 @@ void get_vocab_from_data(const wchar_t **sentences, const int line_num, const in
                     fclose(file_ptr);
                 }
             }
-        } else 
+        } else if (sentences != NULL && line_num > 0)
         {
             byte_pair_encoding(sentences, line_num, iterations, iter_file_name, vocab_array, vocab_count, vocab_file_name, save);
             fclose(file_ptr);
         }
-    } else
+    } else if (sentences != NULL && line_num > 0)
     {
         byte_pair_encoding(sentences, line_num, iterations, iter_file_name, vocab_array, vocab_count, vocab_file_name, save);
     }

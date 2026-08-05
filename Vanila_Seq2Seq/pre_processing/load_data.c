@@ -1,6 +1,6 @@
 #include "include.h"
 
-void load_data(char *filename, wchar_t ***sources, wchar_t ***targets, int *line_num)
+void load_data(const char *filename, wchar_t ***sources, wchar_t ***targets, int *line_num)
 {
     // Checking for invalid argument
     if (filename == NULL || sources == NULL || targets == NULL || line_num == NULL)

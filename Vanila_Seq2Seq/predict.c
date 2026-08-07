@@ -14,7 +14,6 @@ int main(int argc, char **argv)
         return 1;
     }
     sentence[MAX_SENTENCE_LENGTH - 1] = L'\0';
-    printf("%ls\n", sentence);
 
     // Source vocabulary array
     wchar_t **sources_vocab_array;
@@ -70,14 +69,30 @@ int main(int argc, char **argv)
     encoder_forward(encoder, embedded_matrix, MAX_SENTENCE_LENGTH, sources_embedd_dim, encoder_hidden_state, x_t, x_H, x_h_H);
     float *context_vector = encoder_hidden_state + (MAX_SENTENCE_LENGTH * encoder->hidden_dim);
     decoder_predict(decoder, targets_embeddings, context_vector, output_ids, h_curr, h_prev, y_t, y_H, h_H, curr_pred);
-    int i;
-    for (i = 0; i < MAX_SENTENCE_LENGTH; i += 1)
+    
+    // The output
+    wchar_t output[MAX_SENTENCE_LENGTH];
+    int i, offset = 0;
+    for (i = 0; i < (MAX_SENTENCE_LENGTH) && (offset < MAX_SENTENCE_LENGTH - 1); i += 1)
     {
-        printf("%d ", output_ids[i]);
-    }
-    printf("\n");
+        if (output_ids[i] == 0)
+        {
+            break;
+        }
 
-    // Freeing memory
+        int j;
+        for (j = 0; 
+            (j < MAX_TOKEN_LENGTH) && 
+            (targets_vocab_array[output_ids[i]][j] != L'\0') && 
+            ((offset + j) < (MAX_SENTENCE_LENGTH - 1)); j += 1)
+        {
+            output[offset + j] = targets_vocab_array[output_ids[i]][j];
+        }
+        offset += j;
+    }
+    output[offset] = L'\0';
+    printf("%ls\n", output);
+
     encoder_free(encoder);
     decoder_free(decoder);
     free(sources_embeddings);

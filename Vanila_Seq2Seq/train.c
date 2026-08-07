@@ -22,7 +22,6 @@ int main(int argc, char **argv)
         "./data/sources_matrix.bin", 
         "./data/targets_matrix.bin", 
         1);
-    printf("Source vocab count: %d\nTargets vocab count: %d\n", sources_vocab_count, targets_vocab_count);
 
     // Encoder embedding layer
     float *embedd_sources;

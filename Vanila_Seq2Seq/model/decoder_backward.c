@@ -72,13 +72,13 @@ void decoder_backward(struct DecoderRNN *decoder, const float *decoder_input, co
             D_h_next[col] = 0.0f;
             for (row = 0; row < decoder->hidden_dim; row += 1)
             {
-                D_h_next[col] += D_raw[row] * decoder->W_H[row * decoder->hidden_dim + col];
+                D_h_next[col] += D_raw[row] * decoder->W_H[col * decoder->hidden_dim + row];
             }
         }
     }
 
     for (col = 0; col < decoder->hidden_dim; col += 1)
     {
-        D_encoder_context[col] = D_h_next[col];
+        D_encoder_context[col] += D_h_next[col];
     }
 }

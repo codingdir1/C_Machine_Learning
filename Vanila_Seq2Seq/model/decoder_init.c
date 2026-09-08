@@ -2,7 +2,7 @@
 
 void decoder_init(struct DecoderRNN **decoder, const int hidden_dim, const int output_dim, const int input_dim)
 {
-    if (decoder == NULL || hidden_dim <= 0 || output_dim <= 0)
+    if (decoder == NULL || hidden_dim <= 0 || output_dim <= 0 || input_dim <= 0)
     {
         return;
     }

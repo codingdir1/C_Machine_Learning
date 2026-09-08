@@ -23,8 +23,8 @@ void decoder_predict(const struct DecoderRNN *decoder, const float *targets_embe
         matrix_mul(decoder->W_out, decoder->output_dim, decoder->hidden_dim, h_curr, decoder->hidden_dim, 1, curr_pred);
         matrix_sum_two(curr_pred, decoder->b_out, decoder->output_dim, 1, curr_pred);
 
-        int arg_max = 1, j;
-        for (j = 2; j < decoder->output_dim; j += 1)
+        int arg_max = 0, j;
+        for (j = 1; j < decoder->output_dim; j += 1)
         {
             if (curr_pred[j] > curr_pred[arg_max])
             {
@@ -33,10 +33,16 @@ void decoder_predict(const struct DecoderRNN *decoder, const float *targets_embe
         }
         curr_token_id = arg_max;
         output_ids[i] = arg_max;
+
         if (arg_max == EOS_ID)
         {
             break;
         }
         memcpy(h_prev, h_curr, decoder->hidden_dim * sizeof(float));
+    }
+
+    if (i == MAX_SENTENCE_LENGTH)
+    {
+        output_ids[MAX_SENTENCE_LENGTH - 1] = EOS_ID; 
     }
 }

@@ -3,7 +3,7 @@
 void gradient_descent(float * sources_embeddings, float *targets_embeddings, const int sources_vocab_count, const int targets_vocab_count, const int dim, struct EncoderRNN *encoder, struct DecoderRNN *decoder, const float *D_sources_embeddings, const float *D_targets_embeddings, const float learning_rate)
 {
     if (sources_embeddings == NULL || targets_embeddings == NULL ||
-        sources_vocab_count == 0 || targets_vocab_count <= 0 || dim <= 0 ||
+        sources_vocab_count <= 0 || targets_vocab_count <= 0 || dim <= 0 ||
         encoder == NULL || decoder == NULL ||
         D_sources_embeddings == NULL || D_targets_embeddings == NULL)
     {

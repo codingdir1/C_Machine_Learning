@@ -10,6 +10,11 @@ void embedding_backward(float *d_weights, const int *sentence, const float *d_ou
     int i;
     for (i = 0; i < MAX_SENTENCE_LENGTH; i += 1)
     {
+        if (sentence[i] == PAD_ID)
+        {
+            continue;
+        }
+
         int j, offset = sentence[i] * dim;
         for (j = 0; j < dim; j += 1)
         {

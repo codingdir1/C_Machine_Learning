@@ -57,7 +57,7 @@ void encoder_backward(struct EncoderRNN *encoder, const float *encoder_input, co
             D_h_next[col] = 0.0f;
             for (row = 0; row < encoder->hidden_dim; row += 1)
             {
-                D_h_next[col] += D_raw[row] * encoder->W_H[row * encoder->hidden_dim + col];
+                D_h_next[col] += D_raw[row] * encoder->W_H[col * encoder->hidden_dim + row];
             }
         }
     }

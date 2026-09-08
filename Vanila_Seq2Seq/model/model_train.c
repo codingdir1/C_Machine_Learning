@@ -66,7 +66,7 @@ void model_train(const int **sources_matrix, const int **targets_matrix, const i
 
                 encoder_forward(encoder, sources_embedded, MAX_SENTENCE_LENGTH, EMBEDD_DIM, encoder_hidden_state, x_t, x_H, x_h_H);
 
-                float *encoder_context = encoder_hidden_state + ((MAX_SENTENCE_LENGTH - 1) * HIDDEN_DIM);
+                float *encoder_context = encoder_hidden_state + (MAX_SENTENCE_LENGTH * HIDDEN_DIM);
 
                 decoder_forward(decoder, targets_embedded, MAX_SENTENCE_LENGTH, EMBEDD_DIM, encoder_context, decoder_hidden_state, logits, y_t, y_H, y_h_H, curr_pred);
             
